@@ -44,27 +44,30 @@
     </p>
     <p>
       <div class="mb-3">
-      <input type="hidden" class="form-control" name="date" id="demo">
+        <input type="hidden" name="date" id="date" class="form-control ml-3 mt-2 p-2">
     </div>
     </p>
 
 
-
-    <button type="submit" class="btn btn-primary" id="sukses">KIRIM</button>
+    <button onclick="myFunction()" type="submit" class="btn">KIRIM</button>
+    <!-- <button type="submit" class="btn btn-primary" id="sukses">KIRIM</button> -->
     </form>
         
         <a href="index.html">Back</a>
 
 
+<!-- <p id="date"></p> -->
 
 
 
 
 
-
+<!-- tanggal -->
 <script type="text/javascript">
-const d = new Date();
-document.getElementById("demo").innerHTML = d;
+  const d = new Date();
+  document.getElementById("date").innerHTML = d;
+  // document.getElementById("date").textContent = d;
+  // document.getElementById("date").value =+d;
 </script>
 
 
