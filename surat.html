@@ -29,29 +29,27 @@
 </head>
   <body class="bg-fixed bg-1">
 
-    <form method="post" action="https://script.google.com/macros/s/AKfycbzCB123sAr6AmxdstdWUoSSvehcH4pb2YWRrLDZ45jD37xFP1hXNxgpMS5iC0nMWgw/exec">
-    <!-- <input name="email" type="email" placeholder="Email" required>
-    <input name="name" type="text" placeholder="Name" required> -->
-    <div class="mb-3">
+    <form name="submit-to-google-sheet">
       <label for="exampleFormControlInput1" class="form-label">Email</label>
-      <input type="email" class="form-control" name="email" placeholder="name@example.com">
-    </div>
-    <p>
-      <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">Catatan</label>
-      <textarea class="form-control" name="name" rows="3"></textarea>
-    </div>
-    </p>
-    <p>
-      <div class="mb-3">
-        <input type="hidden" name="date" id="date" class="form-control ml-3 mt-2 p-2">
-    </div>
-    </p>
-
-
-    <button onclick="myFunction()" type="submit" class="btn">KIRIM</button>
-    <!-- <button type="submit" class="btn btn-primary" id="sukses">KIRIM</button> -->
+      <input type="email" class="form-control" name="email" placeholder="name@example.com" required>
+      <label for="exampleFormControlInput1" class="form-label">First Name</label>
+      <input name="firstName" type="text" placeholder="First Name" class="form-control">
+      <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+      <input name="lastName" type="text" placeholder="Last Name" class="form-control">
+      <button type="submit">Send</button>
     </form>
+    
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbz5yPxchH77agGrou4SJqYp21jShfbaU0yY2etc9qXsiqfuJcxkGcJbK9TbFNTPR0OF/exec'
+      const form = document.forms['submit-to-google-sheet']
+    
+      form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => console.log('Success!', response))
+          .catch(error => console.error('Error!', error.message))
+      })
+    </script>
         
         <a href="index.html">Back</a>
 
