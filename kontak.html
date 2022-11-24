@@ -15,6 +15,11 @@
 
 
     <div class="container-sm">
+
+      <div class="alert alert-success alert-dismissible fade show d-none my-alert" role="alert">
+        <strong>Terima Kasih</strong> Pesan anda sudah saya terima.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
         <form name="submit-to-google-sheet">
         <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Nama</label>
@@ -29,7 +34,13 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" type="pesan" name="pesan"></textarea>
         </div>
 
-        <button type="submit" class="btn btn-success">KIRIM</button>
+        <button type="submit" class="btn btn-success btn-kirim">KIRIM</button>
+        
+        <button class="btn btn-success btn-loading d-none" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Loading...
+        </button>
+
         <a href="index.html">Kembali</a>
     </form>
     </div>
@@ -51,12 +62,28 @@
     <!-- skrip google sheets -->
     <script>
       const scriptURL = 'https://script.google.com/macros/s/AKfycbweA8bwQVNUNiibihu1U37rE7m7Ps4wZgkYCBdAW4mXl3prYeiofTj1wfn4RhGSa6rc/exec'
-      const form = document.forms['submit-to-google-sheet']
+      const form = document.forms['submit-to-google-sheet'];
+      const btnKirim = document.querySelector('.btn-kirim');
+      const btnLoading = document.querySelector('.btn-loading');
+      const myAlert = document.querySelector('.my-alert');
     
       form.addEventListener('submit', e => {
-        e.preventDefault()
+        e.preventDefault();
+
+        //klik tombol submit->tombol loading muncul
+        btnLoading.classList.toggle('d-none');
+        btnKirim.classList.toggle('d-none');
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-          .then(response => console.log('Success!', response))
+          .then(response => {
+            //klik tombol submit->tombol kirim muncul
+            btnLoading.classList.toggle('d-none');
+            btnKirim.classList.toggle('d-none');
+            //tampil alert
+            myAlert.classList.toggle('d-none');
+            //reset form input jadi kosong
+            form.reset();
+            console.log('Success!', response)
+          })
           .catch(error => console.error('Error!', error.message))
       })
     </script>
