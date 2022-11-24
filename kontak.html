@@ -16,10 +16,7 @@
 
     <div class="container-sm">
 
-      <div class="alert alert-success alert-dismissible fade show d-none my-alert" role="alert">
-        <strong>Terima Kasih</strong> Pesan anda sudah saya terima.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+      
         <form name="submit-to-google-sheet">
         <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Nama</label>
@@ -65,7 +62,7 @@
       const form = document.forms['submit-to-google-sheet'];
       const btnKirim = document.querySelector('.btn-kirim');
       const btnLoading = document.querySelector('.btn-loading');
-      const myAlert = document.querySelector('.my-alert');
+      //const myAlert = document.querySelector('.my-alert');
     
       form.addEventListener('submit', e => {
         e.preventDefault();
@@ -78,10 +75,14 @@
             //klik tombol submit->tombol kirim muncul
             btnLoading.classList.toggle('d-none');
             btnKirim.classList.toggle('d-none');
+
+            //direct link
+            window.location.href = "index.html";
+
             //tampil alert
-            myAlert.classList.toggle('d-none');
+            //myAlert.classList.toggle('d-none');
             //reset form input jadi kosong
-            form.reset();
+            //form.reset();
             console.log('Success!', response)
           })
           .catch(error => console.error('Error!', error.message))
